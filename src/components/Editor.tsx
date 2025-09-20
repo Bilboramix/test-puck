@@ -23,6 +23,25 @@ const config: PuckConfig = {
             );
           },
         },
+        testNested: {
+          type: "custom",
+          render: ({ value, onChange }) => {
+            const onClickTest = () => onChange({ myDate: new Date(), deep: { myDeepDate: new Date() } });
+            console.log("rendering field with value:", value);
+
+            return (
+              <div style={{ color: "black" }}>
+                <button onClick={onClickTest}>Click !</button>
+                {!value && <p>No value</p>}
+                {value && (
+                  <div>
+                    Test value : <pre>{JSON.stringify(value, null, 2)}</pre>
+                  </div>
+                )}
+              </div>
+            );
+          },
+        },
       },
       render: ({ children }) => {
         return <h1>{children}</h1>;
